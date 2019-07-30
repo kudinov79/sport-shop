@@ -21,20 +21,18 @@ let app = {
 
     menuFunc: function () {
         $('.hamburger').on('click', function () {
-            let $navList = $('.header-drop-menu-block');
-            $(this).parent().toggleClass('active');
-            if (!$navList.hasClass('active')) {
-                $navList.addClass('active').removeClass('hidden');
-            } else {
-                $navList.removeClass('active');
-                setTimeout(function () {
-                    $navList.addClass('hidden');
-                }, 450);
-            }
+            let $navBlock = $('.header-drop-menu-block');
+            $(this).addClass('active');
+            $navBlock.fadeIn(250).addClass('active');
         });
-
-        $('.head-nav-list').on('click', function () {
-
+        $('.header-drop-menu-block').on('click', function (e) {
+            let $th = $(this),
+                isOpened = $th.hasClass('active') && !$(e.target).is('.head-nav-list');
+            if (isOpened) {
+                $('.hamburger').removeClass('active');
+                $th.removeClass('active');
+                $th.fadeOut(750);
+            }
         });
     },
 
